@@ -25,7 +25,7 @@
 + 第二类：从节点A出发，前往节点B的哪条路径最短？
 [查找一个人的朋友圈是否有�经销商�](bfs.js)
 ### 权重图
+![image-20220331150805439](https://s2.loli.net/2022/03/31/irtLWBYHoQKesE7.png)
 ## 贪心
 ### 覆盖广播站问题
-![image-20220331150805439](https://s2.loli.net/2022/03/31/irtLWBYHoQKesE7.png)
 [js 实现](greedy.js)
