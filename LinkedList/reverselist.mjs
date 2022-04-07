@@ -13,8 +13,17 @@ const reverseList = head => {
     return pre;
 }
 
+const reverseList2 = head => {
+    if (!head || !head.next) return head;
+    const newHead = reverseList2(head.next);
+    head.next.next = head;
+    head.next = null;
+    return newHead;
+}
+
 // test
 let linkedlist = new LinkedList();
 linkedlist.add([1,2,3,4,5]);
 let head = linkedlist.head;
-console.log(reverseList(head));
+//console.log(reverseList(head));
+console.log(reverseList2(head));
