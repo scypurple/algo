@@ -8,9 +8,9 @@ const f = (i, cw, items, n, w) => {
         maxW = Math.max(cw, maxW);
         return;
     }
-    f(i + 1, cw, items, n, w);
-    if (cw + items[i] <= w) {
-     f(i + 1, cw + items[i], items, n, w);   
+    f(i + 1, cw, items, n, w); // 当前物品不装进背包
+    if (cw + items[i] <= w) { // 已经超过可以背包承受的重量的时候，就不要再装了
+     f(i + 1, cw + items[i], items, n, w); // 当前物品装进背包；  
     }
 }
 f(0,0,[11,7,9,3,5],5,10);
