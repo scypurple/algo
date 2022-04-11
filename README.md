@@ -1,4 +1,7 @@
 # My Js Algo Exersice
+## 大 O 表示法
++ 等差数列 O(n^2) 
++ 等比数列 O(n)
 ## 二分 分治
 ### 快速排序 平均时间复杂度 O(n log n)
 [快速排序](quicksort.js)
