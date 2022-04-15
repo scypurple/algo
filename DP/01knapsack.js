@@ -1,7 +1,7 @@
 const knapsack = (weight, n, w) => {
     // weight:物品重量，n:物品个数，w:背包可承载重量
     let states = new Array(n).fill(0).map(_ => new Array(w).fill(0));
-    states[0][0] = true;  // 第一行的数据要特殊处理，可以利用哨兵优化
+     states[0][0] = true;   //第一行的数据要特殊处理，可以利用哨兵优化
     if (weight[0] <= w) {
         states[0][weight[0]] = true;
     }
@@ -19,4 +19,25 @@ const knapsack = (weight, n, w) => {
     return 0;
 }
 
-console.log(knapsack([2, 2, 4, 6, 3], 5, 9));
+// simplify
+const knapsack1 = (weight, n, w) => {
+    let states = new Array(w+1).fill(false);
+    states[0] = true;
+    if (weight[0] <= w) {
+        states[weight[0]] = true;
+    }
+    for (let i = 1; i < n; i++) {
+        // for (let j = w - weight[i]; j >= 0; j--) {
+        //     if (states[j]) states[j+weight[i]] = true;
+        // }
+        for (let j = 0; j <= w - weight[i]; j++) {
+            if (states[j]) states[j+weight[i]] = true;
+        }
+    }
+    for (let i = w; i >= 0; i--) {
+        if (states[i]) return i;
+    }
+    return 0;
+}
+
+console.log(knapsack([3, 2, 4, 6, 2], 5, 9));
