@@ -49,6 +49,18 @@ const knapsack1 = (weight, value, n, w) => {
     return maxvalue;
 }
 
+const knapsack2 = (items, v, n, w) => {
+    const dp = new Array(w+1).fill(0);
+    if (items[0] <= w) {
+        dp[items[0]] = v[0];
+    }
+    for (let i = 1; i < n; i++) {
+        for (let j = w - items[i]; j >= 0; j--) {
+            dp[j + items[i]] = dp[j] + v[i];
+        }
+    }
+    return dp[w];
+}
 
-
-console.log(knapsack([2, 2, 4, 6, 3], [3, 4, 8, 9, 6], 5, 9));
+console.log(knapsack([2, 2, 7, 6, 3], [3, 4, 18, 9, 6], 5, 9));
+console.log(knapsack([2, 2, 7, 6, 3], [3, 4, 18, 9, 6], 5, 9));
