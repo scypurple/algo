@@ -1,24 +1,19 @@
-const knapsack = (items, v, n, w) => {
-    let states = new Array(n).fill(-1).map(_ => new Array(w + 1).fill(-1));
-    states[0][0] = 0;
-    if (items[0] <= w) {
-        states[0][items[0]] = v[0];
+const knapsack = (wt, val, n, W) => {
+    const dp = new Array(n).fill(0).map(_ => new Array(W+1).fill(0));
+    for (let j = 0; j <= W-wt[0]; j++) {
+        if (wt[0] <= W) {
+            dp[0][j+wt[0]] = val[0];
+        }
     }
     for (let i = 1; i < n; i++) {
-        for (let j = 0; j <= w; j++) {
-            if (states[i - 1][j] >= 0) states[i][j] = states[i - 1][j];
-        }
-        for (let j = 0; j <= w - items[i]; j++) {
-            const val = states[i - 1][j] + v[i];
-            if (val > states[i][j + items[i]]) states[i][j + items[i]] = val;
+        for (let j = 0; j <= W; j++) {
+            dp[i][j] = dp[i-1][j];
+            if (j >= wt[i]) {
+                dp[i][j] = Math.max(dp[i][j], dp[i-1][j-wt[i]]+ val[i]);
+            }
         }
     }
-    let max = -1;
-    for (let j = 0; j <= w; j++) {
-        if (states[n - 1][j] > max) max = states[n - 1][j];
-    }
-    return max;
-
+    return dp[n-1][W];
 }
 
 
@@ -60,4 +55,4 @@ const knapsack2 = (items, v, n, w) => {
 }
 
 console.log(knapsack2([2, 2, 7, 6, 3], [3, 4, 18, 9, 6], 5, 9));
-console.log(knapsack1([2, 2, 7, 6, 3], [3, 4, 18, 9, 6], 5, 9));
+console.log(knapsack([2, 2, 7, 6, 3], [3, 4, 18, 9, 6], 5, 9));
