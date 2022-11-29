@@ -7,4 +7,19 @@ const quickSort = arr => {
     return [...quickSort(less), pivot, ...quickSort(greater)];
 }
 
-console.log(quickSort([3,1,5,6,32,1,6]));
+const qsort = (q, l, r) => {
+  if (l >= r) return;
+  const p = q[Math.floor(Math.random()*(r-l)+l)];
+  let i = l - 1;
+  let j = r + 1;
+  while (i < j) {
+    do i++; while (q[i] < p);
+    do j--; while (q[j] > p);
+    if (i < j) [q[i], q[j]] = [q[j], q[i]];
+  }
+  qsort(q, l, j);
+  qsort(q, j+1, r);
+}
+const a = [0,2,2,2,2,2,5];
+qsort(a, 0, 6)
+console.log(a);
